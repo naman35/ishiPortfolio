@@ -1,0 +1,1108 @@
+<?php include("adheader.php"); include("dbconnection.php"); if(isset($_POST[submit]))
+{
+if(isset($_GET[editid]))
+{
+$sql	="UPDATE	admin	SET adminname='$_POST[adminname]',loginid='$_POST[loginid]',password='$_POST[p assword]',status='$_POST[select]' WHERE adminid='$_GET[editid]'";
+if($qsql = mysqli_query($con,$sql))
+{
+}
+else
+{
+}
+else
+{
+
+}
+ 
+echo "<div class='alert alert-success'> Admin Record updated successfully
+</div>";
+echo mysqli_error($con);
+ 
+$sql	="INSERT	INTO	admin(adminname,loginid,password,status) values('$_POST[adminname]','$_POST[loginid]','$_POST[password]','$_POST[select
+]')";
+if($qsql = mysqli_query($con,$sql))
+{
+}
+else
+{
+}
+}
+}
+echo "<div class='alert alert-success'> Admin Record Inserted successfully
+</div>";
+echo mysqli_error($con);
+ 
+if(isset($_GET[editid]))
+{
+$sql="SELECT * FROM admin WHERE adminid='$_GET[editid]' ";
+$qsql = mysqli_query($con,$sql);
+$rsedit = mysqli_fetch_array($qsql);
+
+}
+?>
+<div class="container-fluid">
+    <div class="block-header">
+        <h2 class="text-center"> Add New Admin </h2>
+    </div>
+    <div class="row clearfix">
+        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+            <div class="card">
+
+                <form method="post" action="" name="frmadminprofile" onSubmit="return validateform()">
+                    Name</label> line">
+                    <div class="body">
+                        <div class="row clearfix">
+                            <div class="col-sm-12">
+                                <divclass="form-group">
+                                    <label> Admin
+
+                                        <div class="form- <input type=" text" class="form-control" name="adminname" id="adminname" value="<?php echo $rsedit[adminname]; ?>" />
+                            </div>
+                        </div>
+
+                    </div>
+                    Log in Id</label>
+
+            </div>
+            <div class="row clearfix">
+                <div class="col-sm-12">
+                    <div class="form-group">
+                        <label>Admin
+
+                            <div class="form-line">
+                                <input type="text" class="form-control" name="loginid" id="loginid" value="<?php echo $rsedit[loginid]; ?>" />
+
+
+
+
+                            </div>
+                    </div>
+                </div>
+            </div>
+            Password</label> line">
+            <div class="row clearfix">
+                <div class="col-sm-12">
+                    <divclass="form-group">
+                        <label> Admin
+                            <div class="form-
+
+<input type=" password" class="form-control" name="password" id="password" value="<?php echo $rsedit[password]; ?>" />
+                </div>
+            </div>
+        </div>
+    </div>
+    Admin Password</label> line">
+
+    <div class="row clearfix">
+        <div class="col-sm-12">
+            <div class="form-group">
+                <label>Confirm
+
+                    <div class="form-
+
+<input type=" password" class="form-control" name="cnfirmpassword" id="cnfirmpassword" value="<?php echo $rsedit[confirmpassword]; ?>" />
+            </div>
+        </div>
+    </div>
+</div>
+drop-custum">
+
+<label>Status</label>
+
+<div class="row clearfix">
+    <div class="col-sm-3col-xs-12">
+        <div class="form-group
+<select class=" form-control show-tick" name="select"> value="" selected>Select One</option>
+            array("Active","Inactive"); foreach($arr as $val)
+            <option <?php $arr={ if($val==$rsedit[status]) { echo "<option value='$val' selected>$val</option>" ; } else
+                { echo "<optionvalue='$val'>$val</option>" ; </div>
+        </div>
+    </div>
+
+    }
+    }
+    ?>
+    </select>
+    <divclass="col-sm-12">
+        <input type="submit" class="btn btn-raised g-bg-cyan" name="submit" id="submit" value="Submit" />
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</form>
+<?php include("adfooter.php");
+?>
+
+<script type="application/javascript"> var alphaExp = /^[a-zA-Z]+$/; //Variable to validate only alphabets
+    var alphaspaceExp = /^[a-zA-Z\s]+$/; //Variable to validate only alphabets and space var numericExpression = /^[0-9]+$/; //Variable to validate only numbers
+    var alphanumericExp = /^[0-9a-zA-Z]+$/; //Variable to validate numbers and alphabets
+    var emailExp = /^[\w\-\.\+]+\@[a-zA-Z0-9\.\-]+\.[a-zA-z0-9]{2,4}$/; //Variable to validate Email ID
+
+    function validateform() {
+        if (document.frmadmin.adminname.value == "") {
+            alert("Admin name should not be empty.."); document.frmadmin.adminname.focus(); return false;
+        }
+        else if (!document.frmadmin.adminname.value.match(alphaspaceExp)) {
+            alert("Admin name not valid.."); document.frmadmin.adminname.focus(); return false;
+        }
+        else if (document.frmadmin.loginid.value == "") {
+            alert("Login ID should not be empty.."); document.frmadmin.loginid.focus(); return false;
+        }
+        else if (!document.frmadmin.loginid.value.match(alphanumericExp)) {
+            alert("Login ID not valid.."); document.frmadmin.loginid.focus(); return false;
+        }
+        else if (document.frmadmin.password.value == "") {
+            alert("Password should not be empty.."); document.frmadmin.password.focus(); return false;
+        }
+        else if (document.frmadmin.password.value.length < 8) {
+            alert("Password length should be more than 8 characters...");
+
+            document.frmadmin.password.focus(); return false;
+        }
+        else if (document.frmadmin.password.value != document.frmadmin.cnfirmpassword.value) {
+            alert("Password and confirm password should be equal.."); document.frmadmin.password.focus();
+            return false;
+        }
+        else if (document.frmadmin.select.value == "") {
+        }
+        else {
+        }
+    }
+    alert("Kindly select the status.."); document.frmadmin.select.focus(); return false;
+    return true;
+</script>
+7.1.2 Adminaccount.php
+<?php include("adheader.php"); include("dbconnection.php");
+
+session_start();
+if (!isset($_SESSION[adminid])) {
+echo "<script>window.location='adminlogin.php';</script>";
+}
+if (!isset($_SESSION[adminid])) {
+echo "<script>window.location = 'adminlogin.php';</script>";
+}
+
+?>
+<div class="container-fluid">
+    <div class="block-header">
+        <h2>Dashboard</h2>
+        <small class="text-muted">Welcome to Admin Panel</small>
+    </div>
+
+    <div class="row clearfix">
+        <div class="col-lg-3 col-md-3 col-sm-6">
+            <div class="info-box-4 hover-zoom-effect">
+                <div class="icon"> <i class="zmdi zmdi-male-female col-blush"></i>
+
+                </div>
+
+
+                <div class="content">
+                    <div class="text">Total Patient</div>
+                    <div class="number">
+                        <?php
+$sql = "SELECT * FROM patient WHERE status='Active'";
+$qsql = mysqli_query($con, $sql); echo mysqli_num_rows($qsql);
+?>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        <div class="col-lg-3 col-md-3 col-sm-6">
+            <div class="info-box-4 hover-zoom-effect">
+                <div class="icon"> <i class="zmdi zmdi-account-circle col-cyan"></i>
+
+                </div>
+
+
+                <div class="content">
+                    <div class="text">Total Doctor </div>
+                    <div class="number">
+                        <?php
+$sql = "SELECT * FROM doctor WHERE status='Active' ";
+$qsql = mysqli_query($con, $sql); echo mysqli_num_rows($qsql);
+?>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        <div class="col-lg-3 col-md-3 col-sm-6">
+            <div class="info-box-4 hover-zoom-effect">
+                <div class="icon"> <i class="zmdi zmdi-account-box-mail col-blue"></i>
+
+                </div>
+
+
+                <div class="content">
+                    <div class="text">Total Administrator</div>
+                    <div class="number">
+                        <?php
+$sql = "SELECT * FROM admin WHERE status='Active'";
+$qsql = mysqli_query($con, $sql); echo mysqli_num_rows($qsql);
+ 
+?>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-3 col-md-3 col-sm-6">
+            <div class="info-box-4 hover-zoom-effect">
+                <div class="icon"><i class="zmdi zmdi-balance-wallet"></i> </div>
+                <div class="content">
+                    <div class="text">Hospital Earning</div>
+                    <div class="number">₹
+                        <?php
+$sql = "SELECT sum(bill_amount) as total FROM `billing_records` ";
+$qsql = mysqli_query($con, $sql);
+while ($row = mysqli_fetch_assoc($qsql)) { echo $row['total'];
+}
+?>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="clear"></div>
+</div>
+</div>
+<?php include("adfooter.php");
+?>
+7.1.3 Adminlogin.php
+<?php session_start();
+
+?>
+<?php error_reporting(0);
+include("dbconnection.php");
+$dt = date("Y-m-d");
+$tim = date("H:i:s");
+?>
+
+<!-- header section -->
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+    <meta content="width=device-width,	initial-scale=1,	maximum-scale=1,	user- scalable=no" name="viewport">
+    <title>Hospital Admin</title>
+    <link href="assets/plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" type="text/css">
+    <link rel="icon" href="favicon.ico" type="image/x-icon">
+    <!-- Custom Css -->
+    <link href="assets/css/main.css" rel="stylesheet">
+    <linkhref="assets /css/login.css"rel="stylesheet">
+
+        <!-- Swift Themes. You can choose a theme from css/themes instead of get all themes
+-->
+        <link href="assets/css/themes/all-themes.css" rel="stylesheet" />
+</head>
+
+<body class="theme-cyan login-page authentication">
+    <!-- header section -->
+
+    <?php if(isset($_SESSION[adminid]))
+{
+echo "<script>window.location='adminaccount.php';</script>";
+}
+$err='';
+if(isset($_POST[submit]))
+
+{
+$sql = "SELECT * FROM admin WHERE loginid='$_POST[loginid]' AND
+password='$_POST[password]' AND status='Active'";
+$qsql = mysqli_query($con,$sql); if(mysqli_num_rows($qsql) == 1)
+{
+}
+else
+{
+ 
+$rslogin = mysqli_fetch_array($qsql);
+$_SESSION[adminid]= $rslogin[adminid] ;
+echo "<script>window.location = 'adminaccount.php';</script>";
+again.
+}
+?>
+    $err = "<div class='alert alert-danger'>
+        <strong>Oh !</strong> Change a few things up and try submitting
+
+    </div>";
+    }
+    <div class="container">
+        <div id="err">
+            <?php echo $err;
+?>
+        </div>
+        <div class="card-top"></div>
+        <div class="card">
+            <h1 class="title"><span>Hospital Management System</span>Login <span class="msg">Sign in to start your
+                    session</span></h1>
+            <div class="col-md-12">
+
+                <form method="post" action="" name="frmadminlogin" id="sign_in" onSubmit="return validateform()">
+                    <div class="input-group"> <span class="input-group-addon"> <i class="zmdi zmdi-account"></i> </span>
+                        <div class="form-line">
+                            <input type="text" name="loginid" id="loginid" class="form-control"
+                                placeholder="Username" />
+                        </div>
+                    </div>
+                    <div class="input-group"> <span class="input-group-addon"> <i class="zmdi zmdi-lock"></i> </span>
+                        <div class="form-line">
+                            <input type="password" name="password" id="password" class="form-control"
+                                placeholder="Password" />
+                        </div>
+                    </div>
+                    <div>
+                        <div class="">
+                            <input type="checkbox" name="rememberme" id="rememberme" class="filled-in chk-col-pink">
+                            <label for="rememberme">Remember Me</label>
+                        </div>
+                        <div class="text-center">
+                            <input type="submit" name="submit" id="submit" value="Login"
+                                class="btn btn-raised waves-effect g-bg-cyan" />
+                        </div>
+                        <div class="text-center"> <a href="Forgotpassword.php">Forgot
+
+                                Password?</a></div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <div class="clear"></div>
+    <div class="theme-bg"></div>
+    </div>
+    </div>
+    <!-- Jquery Core Js -->
+    <script src="assets/bundles/libscripts.bundle.js"></script> <!-- Lib Scripts Plugin Js --
+>
+<script src="assets/bundles/vendorscripts.bundle.js"></script> <!-- Lib Scripts Plugin Js -->
+
+    <script src="assets/bundles/mainscripts.bundle.js"></script><!-- Custom Js -->
+</body>
+
+</html>
+<script type="application/javascript">
+    var alphaExp = /^[a-zA-Z]+$/; //Variable to validate only alphabets
+    var alphaspaceExp = /^[a-zA-Z\s]+$/; //Variable to validate only alphabets and space var numericExpression = /^[0-9]+$/; //Variable to validate only numbers
+    var alphanumericExp = /^[0-9a-zA-Z]+$/; //Variable to validate numbers and alphabets
+    var emailExp = /^[\w\-\.\+]+\@[a-zA-Z0-9\.\-]+\.[a-zA-z0-9]{2,4}$/; //Variable to validate Email ID
+
+    function validateform() {
+        if (document.frmadminlogin.loginid.value == "") {
+            document.getElementById("err").innerHTML = "<div class='alert alert- info'><strong>Heads up!</strong> Please enter Password</div>";
+            document.frmadminlogin.loginid.focus(); return false;
+        }
+        else if (!document.frmadminlogin.loginid.value.match(alphanumericExp)) {
+            document.getElementById("err").innerHTML = "<div class='alert alert- Warning'><strong>Heads up!</strong> Invalid Password</div>";
+            document.frmadminlogin.loginid.focus(); return false;
+        }
+
+        else if (document.frmadminlogin.password.value == "") {
+            document.getElementById("err").innerHTML = "<div class='alert alert- info'><strong>Heads up!</strong> Should not be empty</div>";
+            document.frmadminlogin.password.focus(); return false;
+        }
+        else if (document.frmadminlogin.password.value.length < 8) {
+            document.getElementById("err").innerHTML = "<div class='alert alert- info'><strong>Heads up!</strong> Length should be 8</div>";
+            document.frmadminlogin.password.focus(); return false;
+
+        }
+        else {
+
+        }
+    }
+    return true;
+
+</script>
+7.1.4 Doctor.php
+<?php include("adheader.php"); include("dbconnection.php"); if(isset($_POST[submit]))
+{
+if(isset($_GET[editid]))
+{
+$sql	="UPDATE	doctor		SET doctorname='$_POST[doctorname]',mobileno='$_POST[mobilenumber]',departmenti d='$_POST[select3]',loginid='$_POST[loginid]',password='$_POST[password]',statu s='$_POST[select]',education='$_POST[education]',experience='$_POST[experience] ',consultancy_charge='$_POST[consultancy_charge]'		WHERE doctorid='$_GET[editid]'";
+if($qsql = mysqli_query($con,$sql))
+{
+echo	"<script>alert('doctor	record	updated successfully...');</script>";
+}
+else
+{
+echo mysqli_error($con);
+}
+}
+ 
+else
+{
+$sql	="INSERT	INTO
+doctor(doctorname,mobileno,departmentid,loginid,password,status,education,experie nce,consultancy_charge) values('$_POST[doctorname]','$_POST[mobilenumber]','$_POST[select3]','$_POST[l oginid]','$_POST[password]','Active','$_POST[education]','$_POST[experience]','$_P OST[consultancy_charge]')";
+if($qsql = mysqli_query($con,$sql))
+{
+ 
+}
+else
+{
+}
+}
+}
+echo "<script>alert('Doctor record inserted successfully...');</script>";
+echo mysqli_error($con);
+ 
+if(isset($_GET[editid]))
+{
+$sql="SELECT * FROM doctor WHERE doctorid='$_GET[editid]' ";
+$qsql = mysqli_query($con,$sql);
+$rsedit = mysqli_fetch_array($qsql);
+
+}
+?>
+
+<div class="container-fluid">
+    <div class="block-header">
+        <h2 class="text-center"> Add New Doctor </h2>
+    </div>
+    <div class="row clearfix">
+        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+            <div class="card">
+                <form method="post" action="" name="frmdoct" onSubmit="return validateform()" style="padding: 10px">
+                    Name</label>
+                    <div class="form-group"><label>Doctor
+                            <div class="form-line">
+                                <input class="form-control" type="text" name="doctorname" id="doctorname"
+                                    value="<?php echo $rsedit[doctorname]; ?>" />
+                            </div>
+                    </div>
+                    Number</label>
+                    <div class="form-group"><label>Mobile
+
+                            <div class="form-line">
+                                <input class="form-control" type="text" name="mobilenumber" id="mobilenumber" value="<?php echo $rsedit[mobileno];?>" />
+                            </div>
+                    </div>
+                    group"><label>Department</label>
+                    class="form-control show-tick">
+                    department WHEREstatus='Active'"; mysqli_query($con,$sqldepartment);
+                    <div class="form-
+<div class=" form-line">
+                        <select name="select3" id="select3" <option value="">Select</option>
+                            <?php
+$sqldepartment=   "SELECT	* FROM
+
+$qsqldepartment	=
+ 
+while($rsdepartment=mysqli_fetch_array($qsqldepartment))
+{
+
+== $rsedit[departmentid])
+value='$rsdepartment[departmentid]'
+if($rsdepartment[departmentid]
+{
+echo	"<option
+ 
+selected>$rsdepartment[departmentname]</option>";
+}
+else
+{
+echo	"<option
+ 
+value='$rsdepartment[departmentid]'>$rsdepartment[departmentname]</option>";
+}
+
+</div>
+</div>
+ 
+}
+?>
+                        </select>
+                        ID</label>
+
+                        <div class="form-group"><label>Login
+
+                                <div class="form-line">
+                                    <input class="form-control" type="text" name="loginid" id="loginid"
+                                        value="<?php echo $rsedit[loginid]; ?>" />
+                                </div>
+                        </div>
+                        group"><label>Password</label>
+
+                        <div class="form-<div class=" form-line">
+                            <input class="form-control" type="password" name="password" id="password"
+                                value="<?php echo $rsedit[password]; ?>" />
+                        </div>
+                    </div>
+                    Password</label>
+
+                    <div class="form-group"><label>Confirm
+
+                            <div class="form-line">
+                                <input class="form-control" type="password" name="cnfirmpassword" id="cnfirmpassword"
+                                    value="<?php echo $rsedit[password];?>" />
+                            </div>
+                    </div>
+                    group"><label>Education</label>
+                    <div class="form-
+<div class=" form-line">
+                        <input class="form-control" type="text" name="education" id="education"
+                            value="<?php echo $rsedit[education]; ?>" />
+                    </div>
+            </div>
+            <div class="form-group"><label>Experience</label>
+                <div class="form-line">
+                    <input class="form-control" type="text" name="experience" id="experience"
+                        value="<?php echo $rsedit[experience]; ?>" />
+                </div>
+            </div>
+            Charge</label>
+            <div class="form-group"><label>Consultancy
+
+                    <div class="form-line">
+                        <input class="form-control" type="text" name="consultancy_charge" id="consultancy_charge" value="<?php	echo$rsedit[experience]; ?>" />
+                    </div>
+            </div>
+            name="select" id="select"> hidden>Select</option>
+            <div class="form-group">
+                <label>Status</label>
+                <div class="form-line">
+                    <select class="form-control	show-tick" <option value="" selected="" <?php
+                        $arr=array("Active","Inactive"); foreach($arr as $val) { if($val==$rsedit[status]) {
+                        value='$val' selected>$val</option>";
+                        value='$val'>$val</option>";
+                        }
+                        else
+                        {
+
+                        }
+                        }
+                        ?>
+
+                        echo "
+                        <option echo <option></option>
+
+</div>
+</div>
+</select>
+<input class=" btn btn-default" type="submit" name="submit" id="submit" value="Submit" />
+                </div>
+                <?php
+ 
+</div>
+</div>
+</div>
+</form> 
+include("adfooter.php");
+?>
+                <script type="application/javascript">
+                    var alphaExp = /^[a-zA-Z]+$/; //Variable to validate only alphabets
+                    var alphaspaceExp = /^[a-zA-Z\s]+$/; //Variable to validate only alphabets and space var numericExpression = /^[0-9]+$/; //Variable to validate only numbers
+                    var alphanumericExp = /^[0-9a-zA-Z]+$/; //Variable to validate numbers and alphabets
+                    var emailExp = /^[\w\-\.\+]+\@[a-zA-Z0-9\.\-]+\.[a-zA-z0-9]{2,4}$/; //Variable to validate Email ID
+
+                    function validateform() {
+                        if (document.frmdoct.doctorname.value == "") {
+                            alert("Doctor name should not be empty.."); document.frmdoct.doctorname.focus(); return false;
+                        }
+                        else if (!document.frmdoct.doctorname.value.match(alphaspaceExp)) {
+                            alert("Doctor name not valid.."); document.frmdoct.doctorname.focus(); return false;
+                        }
+                        else if (document.frmdoct.mobilenumber.value == "") {
+                            alert("Mobile number should not be empty.."); document.frmdoct.mobilenumber.focus(); return false;
+                        }
+
+                        else if (!document.frmdoct.mobilenumber.value.match(numericExpression)) {
+                            alert("Mobile number not valid.."); document.frmdoct.mobilenumber.focus(); return false;
+                        }
+                        else if (document.frmdoct.select3.value == "") {
+                            alert("Department ID should not be empty.."); document.frmdoct.select3.focus();
+                            return false;
+                        }
+                        else if (document.frmdoct.loginid.value == "") {
+                            alert("loginid should not be empty.."); document.frmdoct.loginid.focus(); return false;
+                        }
+                        else if (!document.frmdoct.loginid.value.match(alphanumericExp)) {
+                            alert("loginid not valid.."); document.frmdoct.loginid.focus(); return false;
+                        }
+                        else if (document.frmdoct.password.value == "") {
+                            alert("Password should not be empty.."); document.frmdoct.password.focus(); return false;
+                        }
+                        else if (document.frmdoct.password.value.length < 8) {
+                            alert("Password length should be more than 8 characters..."); document.frmdoct.password.focus();
+                            return false;
+                        }
+                        else if (document.frmdoct.password.value != document.frmdoct.cnfirmpassword.value) {
+                            alert("Password and confirm password should be equal.."); document.frmdoct.password.focus();
+                            return false;
+                        }
+                        else if (document.frmdoct.education.value == "") {
+                            alert("Education should not be empty.."); document.frmdoct.education.focus(); return false;
+                        }
+                        else if (!document.frmdoct.education.value.match(alphaExp)) {
+                            alert("Education not valid.."); document.frmdoct.education.focus(); return false;
+                        }
+                        else if (document.frmdoct.experience.value == "") {
+                            alert("Experience should not be empty.."); document.frmdoct.experience.focus(); return false;
+                        }
+                        else if (!document.frmdoct.experience.value.match(numericExpression)) {
+                            alert("Experience not valid.."); document.frmdoct.experience.focus(); return false;
+                        }
+                        else if (document.frmdoct.select.value == "") {
+
+
+
+
+                        }
+                        else {
+
+                        }
+                    }
+
+                    alert("Kindly select the status.."); document.frmdoct.select.focus(); return false;
+
+
+
+                    return true;
+
+                </script>
+                7.1.5 Doctoraccount.php
+                <?php
+
+include("adheader.php"); include 'dbconnection.php';
+
+if (!isset($_SESSION[doctorid])) {
+echo "<script>window.location='doctorlogin.php';</script>";
+}
+ 
+?>
+                <div class="container-fluid">
+                    <div class="block-header">
+                        <h2>Welcome
+                            <?php	$sql	=	"SELECT	*	FROM	`doctor`	WHERE doctorid='$_SESSION[doctorid]' ";
+$doctortable = mysqli_query($con, $sql);
+$doc = mysqli_fetch_array($doctortable); echo 'Dr. ' . $doc[doctorname]; ?>
+                        </h2>
+                    </div>
+                </div>
+
+
+
+
+
+                <div class="card">
+                    <section class="container">
+                        <div class="row clearfix" style="margin-top: 10px">
+                            <div class="col-lg-3 col-md-3 col-sm-6">
+                                <div class="info-box-4 hover-zoom-effect">
+                                    <div class="icon"> <i class="zmdi zmdi-file-plus col-blue"></i> </div>
+                                    <div class="content">
+                                        <div class="text">New Appoiment</div>
+                                        <div class="number">
+                                            <?php
+$sql = "SELECT * FROM appointment WHERE `doctorid`= '$_SESSION[doctorid]' AND appointmentdate=' " . date("Y-m-d") . "'";
+$qsql = mysqli_query($con, $sql); echo mysqli_num_rows($qsql);
+?>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-3 col-md-3 col-sm-6">
+                                <div class="info-box-4 hover-zoom-effect">
+                                    <div class="icon"> <i class="zmdi zmdi-account col-cyan"></i> </div>
+                                    <div class="content">
+                                        <div class="text">Number of Patient</div>
+                                        <div class="number">
+                                            <?php
+$sql = "SELECT * FROM patient WHERE status='Active'";
+$qsql = mysqli_query($con, $sql);
+ 
+echo mysqli_num_rows($qsql);
+?>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-3 col-md-3 col-sm-6">
+                                <div class="info-box-4 hover-zoom-effect">
+                                    <div class="icon"> <i class="zmdi zmdi-account-circle col-blush"></i> </div>
+                                    <div class="content">
+                                        <div class="text">Today's Appointment</div>
+                                        <div class="number">
+                                            <?php
+$sql = "SELECT * FROM appointment WHERE status='Approved' AND
+`doctorid`= '$_SESSION[doctorid]' AND appointmentdate=' " . date("Y-m-d") . "'";
+$qsql = mysqli_query($con, $sql); echo mysqli_num_rows($qsql);
+?>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-3 col-md-3 col-sm-6">
+                                <div class="info-box-4 hover-zoom-effect">
+                                    <div class="icon"> <i class="zmdi zmdi-balance-wallet"></i> </div>
+                                    <div class="content">
+                                        <div class="text">Total Earnings</div>
+                                        <div class="number">₹
+                                            <?php
+$sql = "SELECT sum(bill_amount) as total	FROM `billing_records` WHERE `bill_type` = 'Consultancy Charge'";
+$qsql = mysqli_query($con, $sql);
+while ($row = mysqli_fetch_assoc($qsql)) { echo $row['total'];
+}
+?>
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+                </div>
+
+
+                <?php include("adfooter.php");
+?>
+                7.1.6 Doctorlogin.php
+                <?php session_start(); error_reporting(0);
+include("dbconnection.php");
+$dt = date("Y-m-d");
+$tim = date("H:i:s");
+
+include("dbconnection.php"); if(isset($_SESSION[doctorid]))
+{
+echo "<script>window.location='doctoraccount.php';</script>";
+}
+$err='';
+if(isset($_POST[submit]))
+{
+$sql = "SELECT * FROM doctor WHERE loginid='$_POST[loginid]' AND password='$_POST[password]' AND status='Active'";
+$qsql = mysqli_query($con,$sql); if(mysqli_num_rows($qsql) == 1)
+{
+ 
+again.
+}
+else
+{
+ 
+$rslogin = mysqli_fetch_array($qsql);
+$_SESSION[doctorid]= $rslogin[doctorid] ;
+echo "<script>window.location = 'doctoraccount.php';</script>";
+
+$err = "<div class='alert alert-danger'>
+<strong>Oh !</strong> Change a few things up and try submitting
+ 
+</div>";
+}
+}
+?>
+                <!DOCTYPE html>
+                <html>
+                <head>
+                    <meta charset="UTF-8">
+                    <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+                    <meta content="width=device-width,	initial-scale=1,	maximum-scale=1,	user- scalable=no"
+                        name="viewport">
+                    <title>HMS - Admin</title>
+                    <link href="assets/plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
+                    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"
+                        type="text/css">
+                    <link rel="icon" href="favicon.ico" type="image/x-icon">
+                    <!-- Custom Css -->
+                    <link href="assets/css/main.css" rel="stylesheet">
+                    <linkhref="assets /css/login.css"rel="stylesheet">
+                        <!-- Swift Themes. You can choose a theme from css/themes instead of get all themes-->
+                        <link href="assets/css/themes/all-themes.css" rel="stylesheet" />
+                </head>
+                <body class="theme-cyan login-page authentication">
+                    <!-- header section -->
+                    <div class="container">
+                        <div id="err">
+                            <?php echo $err;?>
+                        </div>
+                        <div class="card-top"></div>
+                        <div class="card">
+                            <h1 class="title"><span>Hospital Management System</span>Login <span class="msg">Hello,
+                                    Doctor!</span></h1>
+                            <div class="col-md-12">
+
+                                <form method="post" action="" name="frmadminlogin" id="sign_in"
+                                    onSubmit="return validateform()">
+                                    <div class="input-group"> <span class="input-group-addon"> <i
+                                                class="zmdi zmdi-account"></i> </span>
+                                        <div class="form-line">
+                                            <input type="text" name="loginid" id="loginid" class="form-control"
+                                                placeholder="Username" />
+                                        </div>
+                                    </div>
+                                    <div class="input-group"> <span class="input-group-addon"> <i
+                                                class="zmdi zmdi-lock"></i> </span>
+                                        <div class="form-line">
+                                            <input type="password" name="password" id="password" class="form-control"
+                                                placeholder="Password" />
+                                        </div>
+
+                                    </div>
+                                    <div>
+                                        <div class="">
+                                            <input type="checkbox" name="rememberme" id="rememberme"
+                                                class="filled-in chk-col-pink">
+                                            <label for="rememberme">Remember Me</label>
+                                        </div>
+                                        <div class="text-center">
+                                            <input type="submit" name="submit" id="submit" value="Login"
+                                                class="btn btn-raised waves-effect g-bg-cyan" />
+                                        </div>
+                                        <div class="text-center"> <a href="Forgotpassword.php">Forgot Password?</a>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="clear"></div>
+                    <div class="theme-bg"></div>
+            </div>
+        </div>
+        <!-- Jquery Core Js -->
+        <script src="assets/bundles/libscripts.bundle.js"></script> <!-- Lib Scripts Plugin Js --
+>
+<script src="assets/bundles/vendorscripts.bundle.js"></script> <!-- Lib Scripts Plugin Js -->
+
+        <script src="assets/bundles/mainscripts.bundle.js"></script><!-- Custom Js -->
+        </body>
+
+        </html>
+        <script type="application/javascript">
+            var alphaExp = /^[a-zA-Z]+$/; //Variable to validate only alphabets
+            var alphaspaceExp = /^[a-zA-Z\s]+$/; //Variable to validate only alphabets and space var numericExpression = /^[0-9]+$/; //Variable to validate only numbers
+            var alphanumericExp = /^[0-9a-zA-Z]+$/; //Variable to validate numbers and alphabets
+            var emailExp = /^[\w\-\.\+]+\@[a-zA-Z0-9\.\-]+\.[a-zA-z0-9]{2,4}$/; //Variable to validate Email ID
+
+            function validateform() {
+                if (document.frmdoctlogin.loginid.value == "") {
+                    alert("Login ID should not be empty..");
+
+                    document.frmdoctlogin.loginid.focus(); return false;
+                }
+                else if (!document.frmdoctlogin.loginid.value.match(alphanumericExp)) {
+                    alert("Login ID not valid.."); document.frmdoctlogin.loginid.focus(); return false;
+                }
+                else if (document.frmdoctlogin.password.value == "") {
+                    alert("Password should not be empty.."); document.frmdoctlogin.password.focus(); return false;
+                }
+                else if (document.frmdoctlogin.password.value.length < 8) {
+                    alert("Password length should be more than 8 characters..."); document.frmdoctlogin.password.focus();
+                    return false;
+                }
+
+            }
+        </script>
+        7.1.7 Doctorprofile.php
+        <?php
+include("adheader.php"); include("dbconnection.php"); if(isset($_POST[submit]))
+{
+if(isset($_SESSION[doctorid]))
+{
+$sql	="UPDATE	doctor	SET doctorname='$_POST[doctorname]',mobileno='$_POST[mobilenumber]',departmenti d='$_POST[select3]',loginid='$_POST[loginid]',education='$_POST[education]',expe rience='$_POST[experience]',consultancy_charge='$_POST[consultancy_charge]' WHERE doctorid='$_SESSION[doctorid]'";
+if($qsql = mysqli_query($con,$sql))
+{
+echo	"<script>alert('Doctor	profile	updated successfully...');</script>";
+}
+else
+{
+}
+}
+else
+{
+echo mysqli_error($con);
+ 
+$sql	="INSERT	INTO
+doctor(doctorname,mobileno,departmentid,loginid,password,status,education,experie nce) values('$_POST[doctorname]','$_POST[mobilenumber]','$_POST[select3]','$_POST[l oginid]','$_POST[password]','$_POST[select]','$_POST[education]','$_POST[experie nce]')";
+if($qsql = mysqli_query($con,$sql))
+{
+echo	"<script>alert('Doctor	record	inserted successfully...');</script>";
+}
+else
+{
+echo mysqli_error($con);
+}
+}
+}
+if(isset($_SESSION[doctorid]))
+{
+$sql="SELECT * FROM doctor WHERE doctorid='$_SESSION[doctorid]' ";
+$qsql = mysqli_query($con,$sql);
+$rsedit = mysqli_fetch_array($qsql);
+
+}
+?>
+        <div class="container-fluid">
+            <div class="block-header">
+                <h2 class="text-center"> Doctor's Profile</h2>
+            </div>
+            <div class="row clearfix">
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                    <div class="card">
+
+                        <form method="post" action="" name="frmdoctprfl" onSubmit="return validateform()"
+                            style="padding: 10px">
+                            <div class="row">
+                                <div class="col-sm-4 col-xs-12">
+                                    <div class="form-group">
+                                        id="doctorname"
+                                        <label>Doctor Name</label>
+                                        <div class="form-line">
+                                            <input class="form-control" type="text" name="doctorname"
+                                                value="<?php echo $rsedit[doctorname]; ?>" />
+                                        </div>
+                                    </div>
+
+                                </div>
+                                <div class="col-sm-4 col-xs-12">
+                                    <div class="form-group">
+                                        <label>Mobile Number</label>
+                                        <div class="form-line">
+                                            <input class="form-control" type="text" name="mobilenumber"
+                                                id="mobilenumber" value="<?php echo $rsedit[mobileno]; ?>" />
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-4 col-xs-12">
+                                    <div class="form-group">
+                                        <label>Department</label>
+                                        <div class="form-line">
+                                            <select name="select3" id="select3" class="form-control show-tick">
+                                                <option value="">Select</option>
+                                                <?php
+ 
+$sqldepartment=	"SELECT	*	FROM	department	WHERE status='Active'";
+$qsqldepartment = mysqli_query($con,$sqldepartment); while($rsdepartment=mysqli_fetch_array($qsqldepartment))
+{
+
+if($rsdepartment[departmentid] == $rsedit[departmentid])
+{
+echo	"<option	value='$rsdepartment[departmentid]' selected>$rsdepartment[departmentname]</option>";
+}
+else
+{
+echo	"<option
+value='$rsdepartment[departmentid]'>$rsdepartment[departmentname]</option>";
+}
+}
+?>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    id="loginid"
+
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-4 col-xs-12">
+                                    <div class="form-group">
+                                        <label>Login ID</label>
+                                        <div class="form-line">
+                                            <input class="form-control" type="text" name="loginid"
+                                                value="<?php echo $rsedit[loginid]; ?>" />
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-4 col-xs-12">
+                                    <div class="form-group">
+                                        <label>Education</label>
+                                        <div class="form-line">
+                                            <input class="form-control" type="text" name="education" id="education"
+                                                value="<?php echo $rsedit[education]; ?>" />
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-4 col-xs-12">
+                                    <div class="form-group">
+                                        <label>Experience</label>
+                                        <div class="form-line">
+                                            id="experience"
+
+                                            <input class="form-control" type="text" name="experience"
+                                                value="<?php echo $rsedit[experience]; ?>" />
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-4 col-xs-12">
+                                    <div class="form-group">
+                                        <label>Consultancy charge</label>
+                                        <div class="form-line">
+
+                                            <input class="form-control" type="text" name="consultancy_charge"
+                                                id="consultancy_charge" value="<?php	echo $rsedit[consultancy_charge]; ?>" />
+                                        </div>
+                                    </div>
+                                    <input class="btn	btn-raised" type="submit" name="submit" id="submit"
+                                        value="Submit" />
+                                </div>
+                            </div>
+
+                        </form>
+                        <p>&nbsp;</p>
+                    </div>
+                </div>
+            </div>
+            <div class="clear"></div>
+        </div>
+    </div>
+    <?php
+include("adfooter.php");
+?>
+    <script type="application/javascript">
+        var alphaExp = /^[a-zA-Z]+$/; //Variable to validate only alphabets
+        var alphaspaceExp = /^[a-zA-Z\s]+$/; //Variable to validate only alphabets and space var numericExpression = /^[0-9]+$/; //Variable to validate only numbers
+        var alphanumericExp = /^[0-9a-zA-Z]+$/; //Variable to validate numbers and alphabets
+        var emailExp = /^[\w\-\.\+]+\@[a-zA-Z0-9\.\-]+\.[a-zA-z0-9]{2,4}$/; //Variable to validate Email ID
+
+        function validateform() {
+            if (document.frmdoctprfl.doctorname.value == "") {
+                alert("Doctor name should not be empty.."); document.frmdoctprfl.doctorname.focus();
+                return false;
+            } else if (!document.frmdoctprfl.doctorname.value.match(alphaspaceExp)) {
+                alert("Doctor name not valid.."); document.frmdoctprfl.doctorname.focus();
+                return false;
+            } else if (document.frmdoctprfl.mobilenumber.value == "") {
+                alert("Mobile number should not be empty.."); document.frmdoctprfl.mobilenumber.focus();
+                return false;
+            } else if (!document.frmdoctprfl.mobilenumber.value.match(numericExpression)) {
+                alert("Mobile number not valid..");
+                document.frmdoctprfl.mobilenumber.focus(); return false;
+            } else if (document.frmdoctprfl.select3.value == "") {
+                alert("Department ID should not be empty.."); document.frmdoctprfl.select3.focus();
+                return false;
+            } else if (document.frmdoctprfl.loginid.value == "") {
+                alert("Login ID should not be empty.."); document.frmdoctprfl.loginid.focus();
+                return false;
+            } else if (!document.frmdoctprfl.loginid.value.match(alphanumericExp)) {
+                alert("loginid not valid..");
+                document.frmdoctprfl.loginid.focus(); return false;
+            } else if (document.frmdoctprfl.password.value == "") {
+                alert("Password should not be empty.."); document.frmdoctprfl.password.focus();
+                return false;
+            } else if (document.frmdoctprfl.password.value.length < 8) {
+                alert("Password length should be more than 8 characters..."); document.frmdoctprfl.password.focus();
+                return false;
+            } else if (document.frmdoctprfl.password.value != document.frmdoctprfl.cnfirmpassword.value) {
+                alert("Password and confirm password should be equal.."); document.frmdoctprfl.password.focus();
+                return false;
+            } else if (document.frmdoctprfl.education.value == "") {
+                alert("Education should not be empty.."); document.frmdoctprfl.education.focus(); return false;
+            } else if (!document.frmdoctprfl.education.value.match(alphaExp)) {
+                alert("Education not valid.."); document.frmdoctprfl.education.focus();
+                return false;
+            } else if (document.frmdoctprfl.experience.value == "") {
+                alert("Experience should not be empty.."); document.frmdoctprfl.experience.focus();
+                return false;
+            } else if (!document.frmdoctprfl.experience.value.match(numericExpression)) {
+                alert("Experience not valid..");
+                document.frmdoctprfl.experience.focus(); return false;
+            } else if (document.frmdoctprfl.select.value == "") {
+                alert("Kindly select the status.."); document.frmdoctprfl.select.focus();
+                return false;
+            } else {
+                return true;
+            }
+        }
+    </script>
