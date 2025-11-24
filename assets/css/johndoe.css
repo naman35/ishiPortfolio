@@ -11531,7 +11531,7 @@ p {
 }
 
 .price-card.price-card-requried:after {
-  content: "New";
+  content: "world";
   position: absolute;
   right: -25px;
   top: 10px;
