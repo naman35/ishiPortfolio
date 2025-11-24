@@ -11555,7 +11555,7 @@ p {
   border-radius: 0;
   padding-bottom: 4px;
   margin: 0 auto 20px;
-  max-width: 400px;
+  max-width: 60vw;
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -11570,7 +11570,9 @@ p {
   -webkit-flex-basis: 0;
   -ms-flex-preferred-size: 0;
   flex-basis: 0;
-  display: block;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   color: #212529;
   font-size: 13px;
   font-weight: 500;
